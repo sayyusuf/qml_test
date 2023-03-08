@@ -31,16 +31,28 @@ Item {
         MouseArea {
             width: rect.width; height: rect.height;
             acceptedButtons: Qt.LeftButton | Qt.RightButton
-            onPressed: {
+        /*    onPressed: {
                 if (pressedButtons == Qt.RightButton)
                     rect.color = "blue";
                 else if (pressedButtons == Qt.LeftButton)
                     rect.color = "green";
+            }*/
+            Rectangle {
+                id:subrect;
+                visible: false;
+                x: rectCompSetting.x + rect.width + 10;
+                y: rectCompSetting.y;
+                width: 700;
+                height: 700;
+                color: "red";
+                radius: 10;
             }
             onClicked:{
                 console.log(root.y)
-                var component = Qt.createComponent("comp.qml");
-                var object = component.createObject(mainWindow, {x: rectCompSetting.x + rect.width + 10, y: rectCompSetting.y, width: 700, height: 700, color: "red", radius: 10});
+                subrect.visible = !subrect.visible;
+                rect.color = subrect.visible? "green": rectCompSetting.color;
+                //var component = Qt.createComponent("comp.qml");
+                //var object = component.createObject(mainWindow, {x: rectCompSetting.x + rect.width + 10, y: rectCompSetting.y, width: 700, height: 700, color: "red", radius: 10});
  
                 action();
             }

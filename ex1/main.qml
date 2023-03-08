@@ -1,7 +1,7 @@
-import QtQuick 2.5
-import QtQuick.Window 2.2
 import QtQml 2.15
-import QtQuick.Controls 1.4
+import QtQuick 2.9
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.4
 
 ApplicationWindow {
     id: mainWindow
@@ -12,10 +12,25 @@ ApplicationWindow {
     property variant comps : []
     color: "yellow"
 
+
+    TextField {
+        id: yaz
+        x: 15
+        y: 46
+        width: 200
+        height: 45
+        topPadding: 8
+        font.pointSize: 14
+        bottomPadding: 16
+        placeholderText: "yaz birşeyler"
+        renderType: Text.QtRendering
+        onTextChanged: backend.text = text
+    }
+
     Component{
         id: homeScreen
         Rectangle{
-            x: 300; y: 300;
+            x: 400; y: 400;
             height: 500
             width: 500
             color:"blue"
@@ -59,10 +74,10 @@ ApplicationWindow {
     }
         Component.onCompleted: {
             var component = Qt.createComponent("comp.qml");
-            var object = component.createObject(mainWindow, {x: 0, y: 100, width: 70, height: 70, color: "red", radius: 10});
+            var object = component.createObject(mainWindow, {x: 0, y: 200, width: 70, height: 70, color: "red", radius: 10});
             mainWindow.comps.push(object)
           //  var rectComp = Qt.createComponent("cm.qml")
-            var object2 = rectComp.createObject(mainWindow, {x: 0, y: 200, width: 70, height: 70, color: "red", radius: 10});
+            var object2 = rectComp.createObject(mainWindow, {x: 0, y: 300, width: 70, height: 70, color: "red", radius: 10});
             mainWindow.comps.push(object2)
             
         //    if (object.status == Component.Ready)
@@ -81,7 +96,7 @@ ApplicationWindow {
         id: mainView
         Row {
             id: rr
-            Loader { sourceComponent: rectComp; width: 100; height: 100;}
+            Loader { sourceComponent: rectComp; width: 100; height: 100; y: 100}
             spacing: 10
 
             Button {
